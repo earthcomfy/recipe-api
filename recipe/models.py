@@ -24,7 +24,7 @@ def get_default_recipe_category():
     """
     Returns a default recipe type.
     """
-    return RecipeCategory.objects.get_or_create(title__iexact='Others')[0]
+    return RecipeCategory.objects.get_or_create(name='Others')[0]
 
 
 class Recipe(models.Model):
