@@ -11,6 +11,9 @@ class RecipeCategorySerializer(serializers.ModelSerializer):
 
 
 class RecipeSerializer(serializers.ModelSerializer):
+    author = serializers.PrimaryKeyRelatedField(read_only=True)
+
     class Meta:
         model = Recipe
-        fields = '__all__'
+        fields = ('id', 'category', 'picture', 'title', 'desc',
+                  'cook_time', 'ingredients', 'procedure', 'author')

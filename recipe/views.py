@@ -22,6 +22,9 @@ class RecipeCreateAPIView(generics.CreateAPIView):
     serializer_class = RecipeSerializer
     permission_classes = (IsAuthenticated,)
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
 
 class RecipeAPIView(generics.RetrieveUpdateDestroyAPIView):
     """
