@@ -2,9 +2,10 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Recipe
 from .serializers import RecipeSerializer
+from .permissions import IsAuthorOrReadOnly
 
 
-class RecipeList(generics.ListAPIView):
+class RecipeListAPIView(generics.ListAPIView):
     """
     Get: a collection of recipes
     """
@@ -13,16 +14,7 @@ class RecipeList(generics.ListAPIView):
     permission_classes = (AllowAny,)
 
 
-class RecipeDetail(generics.RetrieveAPIView):
-    """
-    Get: a single recipe
-    """
-    queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
-    permission_classes = (AllowAny,)
-
-
-class RecipeCreate(generics.CreateAPIView):
+class RecipeCreateAPIView(generics.CreateAPIView):
     """
     Create: a recipe
     """
@@ -31,19 +23,10 @@ class RecipeCreate(generics.CreateAPIView):
     permission_classes = (IsAuthenticated,)
 
 
-class RecipeUpdate(generics.UpdateAPIView):
+class RecipeAPIView(generics.RetrieveUpdateDestroyAPIView):
     """
-    Update: a recipe
-    """
-    queryset = Recipe.objects.all()
-    serializer_class = RecipeSerializer
-    permission_classes = (IsAuthenticated,)
-
-
-class RecipeDestroy(generics.DestroyAPIView):
-    """
-    Delete: a recipe
+    Get, Update, Delete a recipe
     """
     queryset = Recipe.objects.all()
     serializer_class = RecipeSerializer
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthorOrReadOnly,)
