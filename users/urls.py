@@ -10,5 +10,7 @@ urlpatterns = [
          name="create_user"),
     path('login/', views.UserLoginAPIView.as_view(), name="login_user"),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('logout/', views.UserLogoutAPIView.as_view(), name='logout_user')
+    path('logout/', views.UserLogoutAPIView.as_view(), name='logout_user'),
+    path('profile/<int:pk>/favorites/', views.UserFavoriteListAPIView.as_view(),
+         name='user_favorites'),
 ]
