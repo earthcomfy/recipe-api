@@ -22,7 +22,7 @@ class CustomUser(AbstractUser):
 
 class Profile(models.Model):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, related_name='favorites', on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     favorites = models.ManyToManyField(Recipe, related_name='favorited_by')
 
     def __str__(self):
