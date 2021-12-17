@@ -1,9 +1,6 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.conf import settings
 from django.utils.translation import gettext_lazy as _
-
-
-User = get_user_model()
 
 
 class RecipeCategory(models.Model):
@@ -32,7 +29,7 @@ class Recipe(models.Model):
     Recipe model
     """
     author = models.ForeignKey(
-        User, related_name="recipes", on_delete=models.CASCADE)
+        settings.AUTH_USER_MODEL, related_name="recipes", on_delete=models.CASCADE)
     category = models.ForeignKey(
         RecipeCategory, related_name="recipe_list", on_delete=models.SET(get_default_recipe_category))
     picture = models.ImageField(upload_to='uploads')
