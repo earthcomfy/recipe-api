@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveAPIView
+from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateAPIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
@@ -72,9 +72,9 @@ class UserLogoutAPIView(GenericAPIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserAPIView(RetrieveAPIView):
+class UserAPIView(RetrieveUpdateAPIView):
     """
-    An endpoint to get information of an authenticated User
+    Get, Update user information
     """
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.CustomUserSerializer
@@ -83,9 +83,21 @@ class UserAPIView(RetrieveAPIView):
         return self.request.user
 
 
+class UserProfileAPIView(RetrieveUpdateAPIView):
+    """
+    Get, Update user profile
+    """
+    queryset = Profile.objects.all()
+    serializer_class = serializers.ProfileSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        return self.request.user.profile
+
+
 class UserFavoriteListAPIView(ListCreateAPIView):
     """
-    Get, Create favorite recipe
+    Get, Create, Delete favorite recipe
     """
     serializer_class = RecipeSerializer
     permission_classes = (IsAuthenticated,)

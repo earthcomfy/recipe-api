@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 
-from .models import CustomUser
+from .models import CustomUser, Profile
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -38,3 +38,12 @@ class UserLoginSerializer(serializers.Serializer):
         if user and user.is_active:
             return user
         raise serializers.ValidationError('Incorrect Credentials')
+
+
+class ProfileSerializer(CustomUserSerializer):
+    """
+    Serializer class to serializer the user Profile model
+    """
+    class Meta:
+        model = Profile
+        fields = ('favorites',)
