@@ -1,7 +1,6 @@
-from django.db import models
-from django.db.models import fields
 from rest_framework import serializers
-from .models import Recipe, RecipeCategory
+
+from .models import Recipe, RecipeCategory, RecipeLike
 
 
 class RecipeCategorySerializer(serializers.ModelSerializer):
@@ -15,17 +14,22 @@ class RecipeSerializer(serializers.ModelSerializer):
     username = serializers.SerializerMethodField()
     category_name = serializers.SerializerMethodField()
     category = RecipeCategorySerializer()
+    total_number_of_likes = serializers.SerializerMethodField()
 
     class Meta:
         model = Recipe
         fields = ('id', 'category', 'category_name', 'picture', 'title', 'desc',
-                  'cook_time', 'ingredients', 'procedure', 'author', 'username')
+                  'cook_time', 'ingredients', 'procedure', 'author', 'username',
+                  'total_number_of_likes')
 
     def get_username(self, obj):
         return obj.author.username
 
     def get_category_name(self, obj):
         return obj.category.name
+
+    def get_total_number_of_likes(self, obj):
+        return obj.get_total_number_of_likes()
 
     def create(self, validated_data):
         category = validated_data.pop('category')
@@ -44,3 +48,11 @@ class RecipeSerializer(serializers.ModelSerializer):
             nested_serializer.update(nested_instance, nested_data)
 
         return super(RecipeSerializer, self).update(instance, validated_data)
+
+
+class RecipeLikeSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = RecipeLike
+        fields = ('id', 'user', 'recipe')

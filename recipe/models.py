@@ -46,3 +46,19 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_total_number_of_likes(self):
+        return self.recipelike_set.count()
+
+
+class RecipeLike(models.Model):
+    """
+    Model to like recipes
+    """
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
+    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
