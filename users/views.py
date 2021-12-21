@@ -1,7 +1,7 @@
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateAPIView
+from rest_framework.generics import GenericAPIView, ListCreateAPIView, RetrieveUpdateAPIView, UpdateAPIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
@@ -125,3 +125,12 @@ class UserFavoriteListAPIView(ListCreateAPIView):
             user_profile.favorites.remove(recipe)
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+class PasswordChangeAPIView(UpdateAPIView):
+    """
+    Change password view for authenticated user
+    """
+    queryset = User.objects.all()
+    permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.PasswordChangeSerializer
