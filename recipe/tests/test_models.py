@@ -20,12 +20,12 @@ class RecipeCategoryModelTest(TestCase):
 class RecipeModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
-        User.objects.create_user(
+        user = User.objects.create_user(
             username='testuser', email='kk@kk.com', password='12three')
-        RecipeCategory.objects.create(name="Appetizer")
+        category = RecipeCategory.objects.create(name="Appetizer")
         Recipe.objects.create(
-            author_id=1,
-            category_id=1,
+            author=user,
+            category=category,
             picture=SimpleUploadedFile(
                 name='test_image.jpg',
                 content=b'',

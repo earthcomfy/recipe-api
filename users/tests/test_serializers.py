@@ -11,7 +11,7 @@ class UserRegisterationSerializerTest(APITestCase):
         """
         Ensure we can create a new user.
         """
-        url = reverse('users:create_user')
+        url = reverse('users:create-user')
         data = {'username': 'testuser',
                 'email': 'kk@kk.com', 'password': "12three"}
 
