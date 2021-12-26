@@ -1,6 +1,6 @@
 import factory
 
-from recipe.models import RecipeCategory, Recipe
+from recipe.models import RecipeCategory, Recipe, RecipeLike
 from users.tests.factories import UserFactory
 
 
@@ -23,3 +23,11 @@ class RecipeFactory(factory.django.DjangoModelFactory):
     cook_time = factory.Faker('date_time')
     ingredients = factory.Faker('text')
     procedure = factory.Faker('text')
+
+
+class RecipeLikeFactory(factory.django.DjangoModelFactory):
+    class Meta:
+        model = RecipeLike
+
+    user = factory.SubFactory(UserFactory)
+    recipe = factory.SubFactory(RecipeFactory)
