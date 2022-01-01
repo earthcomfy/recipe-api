@@ -23,7 +23,7 @@ class CustomUser(AbstractUser):
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    favorites = models.ManyToManyField(Recipe, related_name='favorited_by')
+    bookmarks = models.ManyToManyField(Recipe, related_name='bookmarked_by')
 
     def __str__(self):
         return self.user.username

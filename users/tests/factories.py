@@ -30,9 +30,9 @@ class ProfileFactory(factory.django.DjangoModelFactory):
     user = factory.SubFactory(UserFactory, profile=None)
 
     @factory.post_generation
-    def favorites(self, create, extracted, **kwargs):
+    def bookmarks(self, create, extracted, **kwargs):
         if not create:
             return
         if extracted:
             for favorite in extracted:
-                self.favorites.add(favorite)
+                self.bookmarks.add(favorite)

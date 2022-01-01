@@ -95,7 +95,7 @@ class UserProfileAPIView(RetrieveUpdateAPIView):
         return self.request.user.profile
 
 
-class UserFavoriteListAPIView(ListCreateAPIView):
+class UserBookmarkAPIView(ListCreateAPIView):
     """
     Get, Create, Delete favorite recipe
     """
@@ -106,14 +106,14 @@ class UserFavoriteListAPIView(ListCreateAPIView):
     def get_queryset(self):
         user = User.objects.get(id=self.kwargs['pk'])
         user_profile = get_object_or_404(self.profile, user=user)
-        return user_profile.favorites.all()
+        return user_profile.bookmarks.all()
 
     def post(self, request, pk):
         user = User.objects.get(id=pk)
         user_profile = get_object_or_404(self.profile, user=user)
         recipe = Recipe.objects.get(id=request.data['id'])
         if user_profile:
-            user_profile.favorites.add(recipe)
+            user_profile.bookmarks.add(recipe)
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 
@@ -122,7 +122,7 @@ class UserFavoriteListAPIView(ListCreateAPIView):
         user_profile = get_object_or_404(self.profile, user=user)
         recipe = Recipe.objects.get(id=request.data['id'])
         if user_profile:
-            user_profile.favorites.remove(recipe)
+            user_profile.bookmarks.remove(recipe)
             return Response(status=status.HTTP_200_OK)
         return Response(status=status.HTTP_400_BAD_REQUEST)
 

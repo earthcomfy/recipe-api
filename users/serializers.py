@@ -47,7 +47,7 @@ class ProfileSerializer(CustomUserSerializer):
     """
     class Meta:
         model = Profile
-        fields = ('favorites',)
+        fields = ('bookmarks',)
 
 
 class PasswordChangeSerializer(serializers.Serializer):

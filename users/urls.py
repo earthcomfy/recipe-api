@@ -14,8 +14,8 @@ urlpatterns = [
     path('<int:pk>/', views.UserAPIView.as_view(), name='user-info'),
     path('profile/<int:pk>/', views.UserProfileAPIView.as_view(),
          name='user-profile'),
-    path('profile/<int:pk>/favorites/', views.UserFavoriteListAPIView.as_view(),
-         name='user-favorites'),
+    path('profile/<int:pk>/bookmarks/', views.UserBookmarkAPIView.as_view(),
+         name='user-bookmark'),
     path('<int:pk>/password/change/', views.PasswordChangeAPIView.as_view(),
          name='change-password'),
 ]
