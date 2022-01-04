@@ -50,6 +50,9 @@ class Recipe(models.Model):
     def get_total_number_of_likes(self):
         return self.recipelike_set.count()
 
+    def get_total_number_of_bookmarks(self):
+        return self.bookmarked_by.count()
+
 
 class RecipeLike(models.Model):
     """

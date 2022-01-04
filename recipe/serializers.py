@@ -15,12 +15,13 @@ class RecipeSerializer(serializers.ModelSerializer):
     category_name = serializers.SerializerMethodField()
     category = RecipeCategorySerializer()
     total_number_of_likes = serializers.SerializerMethodField()
+    total_number_of_bookmarks = serializers.SerializerMethodField()
 
     class Meta:
         model = Recipe
         fields = ('id', 'category', 'category_name', 'picture', 'title', 'desc',
                   'cook_time', 'ingredients', 'procedure', 'author', 'username',
-                  'total_number_of_likes')
+                  'total_number_of_likes', 'total_number_of_bookmarks')
 
     def get_username(self, obj):
         return obj.author.username
@@ -30,6 +31,9 @@ class RecipeSerializer(serializers.ModelSerializer):
 
     def get_total_number_of_likes(self, obj):
         return obj.get_total_number_of_likes()
+
+    def get_total_number_of_bookmarks(self, obj):
+        return obj.get_total_number_of_bookmarks()
 
     def create(self, validated_data):
         category = validated_data.pop('category')
