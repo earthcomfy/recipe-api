@@ -43,11 +43,20 @@ class UserLoginSerializer(serializers.Serializer):
 
 class ProfileSerializer(CustomUserSerializer):
     """
-    Serializer class to serializer the user Profile model
+    Serializer class to serialize the user Profile model
     """
     class Meta:
         model = Profile
-        fields = ('bookmarks',)
+        fields = ('bookmarks', 'bio')
+
+
+class ProfileAvatarSerializer(serializers.ModelSerializer):
+    """
+    Serializer class to serialize the avatar
+    """
+    class Meta:
+        model = Profile
+        fields = ('avatar',)
 
 
 class PasswordChangeSerializer(serializers.Serializer):

@@ -95,6 +95,18 @@ class UserProfileAPIView(RetrieveUpdateAPIView):
         return self.request.user.profile
 
 
+class UserAvatarAPIView(RetrieveUpdateAPIView):
+    """
+    Get, Update user avatar
+    """
+    queryset = Profile.objects.all()
+    serializer_class = serializers.ProfileAvatarSerializer
+    permission_classes = (IsAuthenticated,)
+
+    def get_object(self):
+        return self.request.user.profile
+
+
 class UserBookmarkAPIView(ListCreateAPIView):
     """
     Get, Create, Delete favorite recipe
@@ -131,6 +143,8 @@ class PasswordChangeAPIView(UpdateAPIView):
     """
     Change password view for authenticated user
     """
-    queryset = User.objects.all()
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.PasswordChangeSerializer
+
+    def get_object(self):
+        return self.request.user
