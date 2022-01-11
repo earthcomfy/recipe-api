@@ -80,7 +80,7 @@ DATABASES = {
         'USER': config('DB_USERNAME'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOSTNAME'),
-        'PORT': config('DB_PORT'),
+        'PORT': config('DB_PORT', cast=int),
     }
 }
 
