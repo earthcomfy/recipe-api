@@ -35,7 +35,7 @@ $ pip install -r requirements.txt
 
 4. Set up a Postgres database for the project.
 5. Rename the `.env.example` file found in the root directory of the project to `.env` and update
-   the environment variables accordingly. **Note:** For local development, Leave the Cloudinary configs empty.
+   the environment variables accordingly. **Note:** For local development, leave the Cloudinary configs empty.
 6. Run the following commands to setup the database tables and create a super user.
 
 ```
@@ -50,3 +50,7 @@ $ python manage.py runserver
 ```
 
 8. Open a browser and go to http://localhost:8000/.
+
+## License
+
+Usage is provided under the [MIT License](http://opensource.org/licenses/mit-license.php). See LICENSE for the full details.
