@@ -156,8 +156,8 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Recipe API',
-    'DESCRIPTION': 'A recipe app',
+    'TITLE': 'Mesob Recipe API',
+    'DESCRIPTION': 'A recipe sharing platform built using DRF',
     'VERSION': '1.0.0',
 }
 
