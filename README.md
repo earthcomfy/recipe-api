@@ -2,7 +2,7 @@
 
 > This is the backend API for the recipe sharing platform at https://mesob-recipe.netlify.app/
 
-This API allows users to share recipes and find recipes. It is developed using Django rest framework. You can find the api [here](https://recipe-backend-api.herokuapp.com/api).
+This API allows users to share recipes and find recipes. It is developed using Django rest framework. You can find the api [here](https://recipe-backend-api.herokuapp.com/).
 
 ## Basic Features
 
