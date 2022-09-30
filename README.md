@@ -15,12 +15,6 @@ This API allows users to share recipes and find recipes. It is developed using D
 - Unit test using coverage and factory boy.
 - Frontend is built using React.js and can be found [here](https://github.com/earthcomfy/Recipe-app).
 
-## Upcoming features
-
-- Third party authentication.
-- Increase test coverage.
-- Follow other users.
-
 ## Quick Start
 
 To get this project up and running locally on your computer follow the following steps.
